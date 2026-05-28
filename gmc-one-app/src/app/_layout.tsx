@@ -10,8 +10,8 @@ export default function Layout() {
         tabBarStyle: {
           backgroundColor: '#FFF8F0',
           borderTopColor: '#DDD',
-          height: 80,
-          paddingBottom: 100,
+          height: 65,
+          paddingBottom: 10,
         },
         tabBarLabelStyle: {
           fontSize: 12,
@@ -67,6 +67,9 @@ export default function Layout() {
           ),
         }}
       />
+      <Tabs.Screen name="add-coach" options={{ href: null, title: 'Add Coach' }} />
+      <Tabs.Screen name="coach/[id]" options={{ href: null, title: 'My Coach' }} />
+      <Tabs.Screen name="coach/[id]/add-reminder" options={{ href: null, title: 'Add Reminder' }} />
     </Tabs>
   );
 }

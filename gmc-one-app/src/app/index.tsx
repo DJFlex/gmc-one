@@ -30,16 +30,15 @@ export default function GarageScreen() {
       ) : (
         <>
           {coaches.map(coach => (
-            <View key={coach.id} style={styles.coachCard}>
+            <TouchableOpacity key={coach.id} style={styles.coachCard} onPress={() => router.push(`/coach/${coach.id}`)}>
               <Ionicons name="car" size={40} color="#8B4513" />
               <View style={styles.coachInfo}>
-                <Text style={styles.coachTitle}>
-                  {coach.year} GMC {coach.model}
-                </Text>
+                <Text style={styles.coachTitle}>{coach.year} GMC {coach.model}</Text>
                 {coach.nickname ? <Text style={styles.coachNickname}>"{coach.nickname}"</Text> : null}
                 {coach.vin ? <Text style={styles.coachVin}>VIN: {coach.vin}</Text> : null}
               </View>
-            </View>
+              <Ionicons name="chevron-forward" size={24} color="#CCC" />
+            </TouchableOpacity>
           ))}
           <TouchableOpacity style={styles.addButtonSmall} onPress={() => router.push('/add-coach')}>
             <Ionicons name="add-circle-outline" size={20} color="#8B4513" />

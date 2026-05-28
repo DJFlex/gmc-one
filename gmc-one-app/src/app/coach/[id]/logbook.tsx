@@ -31,19 +31,15 @@ export default function LogbookScreen() {
               <Text style={styles.entryTitle}>{entry.title}</Text>
               <Text style={styles.entryDate}>{entry.date}</Text>
             </View>
-            {entry.cost ? (
-              <Text style={styles.entryCost}>${entry.cost}</Text>
-            ) : null}
-            {entry.notes ? (
-              <Text style={styles.entryNotes}>{entry.notes}</Text>
-            ) : null}
+            {entry.cost ? <Text style={styles.entryCost}>${entry.cost}</Text> : null}
+            {entry.notes ? <Text style={styles.entryNotes}>{entry.notes}</Text> : null}
           </View>
         ))
       )}
 
       <TouchableOpacity
         style={styles.addButton}
-        onPress={() => router.push(`/coach/${id}/add-entry`)}
+        onPress={() => router.push({ pathname: '/add-entry', params: { id } })}
       >
         <Ionicons name="add-circle-outline" size={22} color="#FFF" />
         <Text style={styles.addButtonText}>Add Entry</Text>
@@ -62,8 +58,7 @@ const styles = StyleSheet.create({
   emptyTitle: { fontSize: 22, fontWeight: 'bold', color: '#333', marginTop: 16 },
   emptySubtitle: { fontSize: 16, color: '#888', marginTop: 8, textAlign: 'center' },
   entryCard: {
-    backgroundColor: '#FFF', borderRadius: 12, padding: 16,
-    marginBottom: 12,
+    backgroundColor: '#FFF', borderRadius: 12, padding: 16, marginBottom: 12,
     shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 8, elevation: 3,
   },
   entryHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },

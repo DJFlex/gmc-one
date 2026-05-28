@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const TEMPLATES = [
   'Oil & Filter Change',
@@ -22,6 +23,12 @@ export default function AddReminderScreen() {
   const [title, setTitle] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [notes, setNotes] = useState('');
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const handleDateConfirm = (date: Date) => {
+    setDueDate(date.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' }));
+    setShowDatePicker(false);
+  };
 
   const saveReminder = async () => {
     const reminder = {
@@ -63,11 +70,19 @@ export default function AddReminderScreen() {
       />
 
       <Text style={styles.sectionLabel}>Due date</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="e.g. June 2026 or 3,000 miles"
-        value={dueDate}
-        onChangeText={setDueDate}
+      <TouchableOpacity style={styles.dateButton} onPress={() => setShowDatePicker(true)}>
+        <Ionicons name="calendar-outline" size={22} color="#8B4513" />
+        <Text style={[styles.dateButtonText, !dueDate && styles.datePlaceholder]}>
+          {dueDate || 'Pick a date'}
+        </Text>
+      </TouchableOpacity>
+
+      <DateTimePickerModal
+        isVisible={showDatePicker}
+        mode="date"
+        onConfirm={handleDateConfirm}
+        onCancel={() => setShowDatePicker(false)}
+        minimumDate={new Date()}
       />
 
       <Text style={styles.sectionLabel}>Notes (optional)</Text>
@@ -108,6 +123,13 @@ const styles = StyleSheet.create({
     borderColor: '#DDD', padding: 14, fontSize: 18,
   },
   inputMultiline: { height: 100, textAlignVertical: 'top' },
+  dateButton: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    backgroundColor: '#FFF', borderRadius: 8, borderWidth: 1,
+    borderColor: '#DDD', padding: 14,
+  },
+  dateButtonText: { fontSize: 18, color: '#333' },
+  datePlaceholder: { color: '#AAA' },
   saveButton: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
     backgroundColor: '#8B4513', borderRadius: 10,

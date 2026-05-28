@@ -72,6 +72,7 @@ export default function Layout() {
       <Tabs.Screen name="coach/[id]/add-reminder" options={{ href: null, title: 'Add Reminder' }} />
       <Tabs.Screen name="coach/[id]/logbook" options={{ href: null, title: 'Logbook' }} />
       <Tabs.Screen name="coach/[id]/add-entry" options={{ href: null, title: 'Add Entry' }} />
+      <Tabs.Screen name="guide/[id]" options={{ href: null, title: 'Repair Guide' }} />
     </Tabs>
   );
 }

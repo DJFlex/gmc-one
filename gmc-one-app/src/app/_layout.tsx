@@ -70,6 +70,8 @@ export default function Layout() {
       <Tabs.Screen name="add-coach" options={{ href: null, title: 'Add Coach' }} />
       <Tabs.Screen name="coach/[id]" options={{ href: null, title: 'My Coach' }} />
       <Tabs.Screen name="coach/[id]/add-reminder" options={{ href: null, title: 'Add Reminder' }} />
+      <Tabs.Screen name="coach/[id]/logbook" options={{ href: null, title: 'Logbook' }} />
+      <Tabs.Screen name="coach/[id]/add-entry" options={{ href: null, title: 'Add Entry' }} />
     </Tabs>
   );
 }

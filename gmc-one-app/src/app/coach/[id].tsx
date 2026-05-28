@@ -27,12 +27,32 @@ export default function CoachScreen() {
 
   return (
     <ScrollView style={styles.container}>
+      {/* Coach header */}
       <View style={styles.header}>
         <Ionicons name="car" size={48} color="#8B4513" />
         <Text style={styles.title}>{coach.year} GMC {coach.model}</Text>
         {coach.nickname ? <Text style={styles.nickname}>"{coach.nickname}"</Text> : null}
       </View>
 
+      {/* Quick actions */}
+      <View style={styles.actionRow}>
+        <TouchableOpacity
+          style={styles.actionButton}
+          onPress={() => router.push(`/coach/${id}/logbook`)}
+        >
+          <Ionicons name="book-outline" size={28} color="#8B4513" />
+          <Text style={styles.actionText}>Logbook</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.actionButton}
+          onPress={() => router.push(`/coach/${id}/add-reminder`)}
+        >
+          <Ionicons name="notifications-outline" size={28} color="#8B4513" />
+          <Text style={styles.actionText}>Reminders</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Reminders section */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Service Reminders</Text>
         {reminders.length === 0 ? (
@@ -69,6 +89,15 @@ const styles = StyleSheet.create({
   },
   title: { fontSize: 22, fontWeight: 'bold', color: '#333', marginTop: 12 },
   nickname: { fontSize: 16, color: '#8B4513', marginTop: 4 },
+  actionRow: {
+    flexDirection: 'row', gap: 12, marginBottom: 16,
+  },
+  actionButton: {
+    flex: 1, backgroundColor: '#FFF', borderRadius: 12, padding: 20,
+    alignItems: 'center', gap: 8,
+    shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 8, elevation: 3,
+  },
+  actionText: { fontSize: 16, fontWeight: '600', color: '#8B4513' },
   section: {
     backgroundColor: '#FFF', borderRadius: 12, padding: 20,
     shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 8, elevation: 3,
